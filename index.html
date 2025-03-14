@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I AM MUSIC COUNTDOWN</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff; /* White background */
+            font-family: 'Arial', sans-serif;
+            color: #000; /* Black text */
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .album-cover {
+            width: 300px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin: 20px 0;
+            color: #000; /* Black text */
+        }
+
+        .countdown span {
+            font-size: 1rem;
+            letter-spacing: normal;
+            color: #555; /* Gray for smaller text */
+            display: block;
+            margin-top: -10px;
+        }
+
+        @media (max-width: 768px) {
+            .countdown { font-size: 2rem; }
+            .album-cover { width: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Replace 'placeholder.jpg' with your album cover image -->
+        <img src="IAM.jpg" alt="I AM MUSIC Album Cover" class="album-cover">
+
+        <div class="countdown" id="countdown">
+            -:-:-:-
+        </div>
+    </div>
+
+    <script>
+        const countdown = document.getElementById('countdown');
+        const releaseDate = new Date('2025-03-14T08:00:00+01:00');
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = releaseDate - now;
+
+            if (diff <= 0) {
+                countdown.innerHTML = "AVAILABLE NOW";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            countdown.innerHTML = `
+                ${days}<span>DAYS</span>
+                ${hours}<span>HOURS</span>
+                ${minutes}<span>MINUTES</span>
+                ${seconds}<span>SECONDS</span>
+            `;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
